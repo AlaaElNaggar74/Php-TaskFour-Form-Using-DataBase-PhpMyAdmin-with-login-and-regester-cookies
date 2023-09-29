@@ -1,0 +1,21 @@
+
+
+            <?php
+                $data = file("data.txt");
+
+            foreach ($data as $keyPar => $eachRow) {
+
+                $singeRow = explode(",", $eachRow);
+                         if ($_GET["id"] == $keyPar) {
+
+                    foreach ($singeRow as $keyChild => $value) {
+                        echo $keyChild == 0 ?  "<h3>First Name Is : $value </span></h3>" : "";
+                        echo $keyChild == 1 ?  "<h3>Last Name Is :$value </span></h3>" : "";
+                        echo $keyChild == 2 ? "<h3>Email Address Is :$value </span></h3>" : "";
+                    }
+                }
+                echo "</tr>";
+            }
+
+
+            ?>

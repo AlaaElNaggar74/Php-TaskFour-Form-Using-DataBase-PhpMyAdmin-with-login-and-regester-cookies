@@ -1,0 +1,208 @@
+https://ubuntu.com/server/docs/programming-php
+
+
+opt/lampp/htdocs 
+to make any path for loacl host 
+
+sudo mkdir alaa
+
+
+elnaggar72@elnaggar72-laptop:/opt/lampp/htdocs$ sudo mkdir alaa
+
+elnaggar72@elnaggar72-laptop:/opt/lampp/htdocs$ cd alaa/
+
+elnaggar72@elnaggar72-laptop:/opt/lampp/htdocs/alaa$ sudo touch alaa.php
+
+
+elnaggar72@elnaggar72-laptop:/opt/lampp$ sudo ./xampp start
+
+elnaggar72@elnaggar72-laptop:/opt/lampp$ sudo ./xampp stop
+
+
+
+
+
+
+elnaggar72@elnaggar72-laptop:/opt/lampp/htdocs$ sudo chmod 777 php-cu/
+
+
+elnaggar72@elnaggar72-laptop:/opt/lampp/htdocs/php-cu$ sudo chmod 777 index.php
+
+
+
+elnaggar72@elnaggar72-laptop:/opt/lampp/htdocs$  sudo chmod -R 777 test/            for all folder and its subfolder
+
+
+
+
+
+
+
+show error in localhost 
+
+ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+error_reporting(-1);
+
+
+
+
+
+
+
+
+
+sudo chmod 755 xampp-linux-x64-8.2.4-0-installer.run
+
+sudo ./xampp-linux-x64-8.2.4-0-installer.run
+
+
+
+
+
+EVERY TIME You Restart Pc 
+
+open cmd as administrator 
+
+
+netstat -aon | findstr :3306
+
+taskkill /F /pid 5648
+
+
+
+
+
+
+skip-grant-tables = TRUE
+
+
+
+
+
+
+
+SET @num := 0;
+UPDATE student SET id = @num := (@num+1);
+ALTER TABLE student AUTO_INCREMENT = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+
+$serverName = 'localhost';
+$userName = 'root';
+$password = '';
+$dbName = 'fci';
+
+
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
+
+$fnameDb = isset($_POST["fname"]) ? $_POST["fname"] : "";
+$lnameDb = isset($_POST["lname"]) ? $_POST["lname"] : "";
+$emailDb = isset($_POST["email"]) ? $_POST["email"] : "";
+$passwordDb = isset($_POST["password"]) ? $_POST["password"] : "";
+$id = isset($_POST["id"]) ? $_POST["id"] : "";
+
+
+
+$con = new mysqli($serverName, $userName, $password, $dbName);
+
+
+if (isset($_POST["add"])) {
+
+    $data = $con->query("select * from student");
+$res=$data->fetch_all(MYSQLI_ASSOC);
+
+echo "<pre>";
+print_r($res);
+echo "</pre>";
+
+    if (count($res)  == 0) {
+        $con->query("SET @num := 0; UPDATE student SET id = @num := (@num+1); ALTER TABLE student AUTO_INCREMENT = 1;");
+
+    } else {
+        echo "<br>";
+        $bool = 0;
+        foreach ($file as $keyPar => $eachRow) {
+            $singeRow = explode(",", $eachRow);
+            foreach ($singeRow as $key => $value) {
+                if ($_GET["email"] == $value) {
+                    $bool = 1;
+                }
+            }
+        }
+        if (!$bool) {
+
+            $con->query("insert into student (fname,lname,email,password) values('$fnameDb','$lnameDb','$emailDb','$passwordDb')");
+            header("location:display.php");
+
+            // $formData["id"] = count($file) + 1;
+            // $dataStr = implode(",", $formData);
+            // file_put_contents("data.txt", "\n" . $dataStr, FILE_APPEND);
+        }
+    }
+
+
+
+    // $con->query("insert into student (fname,lname,email,password) values('$fnameDb','$lnameDb','$emailDb','$passwordDb')");
+    // header("location:display.php");
+
+} elseif (isset($_POST["update"])) {
+    $con->query("UPDATE student SET fname = '$fnameDb', lname= '$lnameDb', email= '$emailDb', password= '$passwordDb' WHERE id='$id' ");
+
+    header("location:display.php");
+}
+//  elseif (isset($_POST["login"])) {
+
+//     $resulte = $con->query("select * from student");
+//     $data = $resulte->fetch_all(MYSQLI_ASSOC);
+
+//     echo "<pre>";
+// print_r($data);
+// echo "</pre>";
+
+// echo "***************************************<br>";
+// //     echo "<pre>";
+// // print_r($_POST);
+// // echo "</pre>";
+
+// }
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
